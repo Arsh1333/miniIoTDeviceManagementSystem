@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 import connectDB from "./config/db.config.js";
 import { Socket } from "dgram";
 import devicesRoute from "./routes/devices.routes.js";
+import startMqttWorker from "./services/mttWorker.services.js";
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use("/devices", devicesRoute);
 app.get("/", (req, res) => res.send("API is running..."));
 
 app.set("io", io);
+
+startMqttWorker(io);
 
 connectDB()
   .then(() => {
