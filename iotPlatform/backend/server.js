@@ -5,6 +5,7 @@ import http from "http";
 import { Server } from "socket.io";
 import connectDB from "./config/db.config.js";
 import { Socket } from "dgram";
+import devicesRoute from "./routes/devices.routes.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
+app.use("/devices", devicesRoute);
 
 app.get("/", (req, res) => res.send("API is running..."));
 

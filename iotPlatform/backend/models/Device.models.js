@@ -6,4 +6,4 @@ const DeviceSchema = new mongoose.Schema({
   lastSeen: { type: Date, default: Date.now },
 });
 
-export const Device = mongoose.model("Device", DeviceSchema);
+export default mongoose.model("Device", DeviceSchema);
