@@ -9,4 +9,4 @@ const TelemetrySchema = new mongoose.Schema({
   serverTime: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("Telemetry", TelemetrySchema);
+export const Telemetry = mongoose.model("Telemetry", TelemetrySchema);
