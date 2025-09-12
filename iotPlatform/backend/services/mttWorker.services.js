@@ -66,8 +66,8 @@ const startMqttWorker = (io) => {
 
       // Emit to frontend via WebSocket
       io.emit("new-reading", {
-        deviceId: device._id.toString(), // ✅ use MongoDB _id
-        uid: device.uid, // keep uid if you want to display it
+        deviceId: device._id.toString(),
+        uid: device.uid,
         ...decoded.data,
         serverTime: telemetry.serverTime,
       });

@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { io } from "socket.io-client";
 import API from "../api";
 
-// ✅ create socket outside component (only one connection)
 const socket = io("http://localhost:5000");
 
 export default function DeviceDetail() {
@@ -14,7 +13,7 @@ export default function DeviceDetail() {
   //     API.get(`/devices/${id}/data`).then((res) => setReadings(res.data));
 
   //     socket.on("new-reading", (data) => {
-  //       console.log("📡 Received new-reading:", data); // debug
+  //`
   //       if (data.device === id) {
   //         setReadings((prev) => [data, ...prev.slice(0, 9)]);
   //       }
@@ -27,10 +26,9 @@ export default function DeviceDetail() {
     API.get(`/devices/${id}/data`).then((res) => setReadings(res.data));
 
     socket.on("new-reading", (data) => {
-      console.log("📡 Received new-reading:", data);
+      console.log(" Received new-reading:", data);
 
       if (data.deviceId === id) {
-        // ✅ match with URL param (_id)
         setReadings((prev) => [data, ...prev.slice(0, 9)]);
       }
     });
