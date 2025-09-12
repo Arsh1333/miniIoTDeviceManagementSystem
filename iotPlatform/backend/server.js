@@ -30,7 +30,7 @@ startMqttWorker(io);
 
 connectDB()
   .then(() => {
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log(`app running on ${port}`);
     });
   })
