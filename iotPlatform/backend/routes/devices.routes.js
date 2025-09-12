@@ -1,31 +1,38 @@
 import express from "express";
 import Device from "../models/Device.models.js";
 import Telemetry from "../models/Telemetry.models.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-// GET /devices - test route
-router.get("/test", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    // Create or find device
-    let device = await Device.findOne({ uid: "123456" });
-    if (!device) {
-      device = await Device.create({ uid: "123456", fw: "1.0.0.0" });
+    const devices = await Device.find();
+    const result = [];
+
+    for (let d of devices) {
+      const latest = await Telemetry.findOne({ deviceId: d._id })
+        .sort({ serverTime: -1 })
+        .lean();
+      result.push({ ...d.toObject(), latest });
     }
 
-    // Add telemetry
-    await Telemetry.create({
-      deviceId: device._id,
-      temp: 23.44,
-      hum: 65.45,
-      pm25: 12,
-      tts: Math.floor(Date.now() / 1000),
-    });
-
-    res.json({ msg: "Sample telemetry inserted" });
+    res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/:id/data", authMiddleware, async (req, res) => {
+  try {
+    const data = await Telemetry.find({ deviceId: req.params.id })
+      .sort({ serverTime: -1 })
+      .limit(10)
+      .lean();
+
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
