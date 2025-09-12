@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate
+import { useNavigate } from "react-router-dom";
 import API from "../api";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ✅ create navigate function
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +13,7 @@ export default function Login({ onLogin }) {
       const res = await API.post("/auth/login", { username, password });
       localStorage.setItem("token", res.data.token);
       onLogin();
-      navigate("/devices"); // ✅ redirect after login
+      navigate("/devices");
     } catch (err) {
       alert("Invalid credentials");
     }

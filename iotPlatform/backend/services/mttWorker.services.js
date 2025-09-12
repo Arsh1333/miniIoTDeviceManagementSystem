@@ -66,10 +66,16 @@ const startMqttWorker = (io) => {
 
       // Emit to frontend via WebSocket
       io.emit("new-reading", {
-        device: device.uid,
+        deviceId: device._id.toString(), // ✅ use MongoDB _id
+        uid: device.uid, // keep uid if you want to display it
         ...decoded.data,
         serverTime: telemetry.serverTime,
       });
+      // io.emit("new-reading", {
+      //   device: device.uid,
+      //   ...decoded.data,
+      //   serverTime: telemetry.serverTime,
+      // });
     } catch (err) {
       console.error(" Error processing MQTT message:", err.message);
     }

@@ -12,7 +12,7 @@ export default function Devices() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/"); // go back to login
+    navigate("/");
   };
 
   return (
