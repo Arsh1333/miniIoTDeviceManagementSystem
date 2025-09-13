@@ -54,7 +54,15 @@ cd backend
 node publisher.js
 
 ```
+## 🔑 Authentication
+- **Default user is created for demo.**
+- **Login at /login with:**
+```
+username: admin
+password: 1234
+```
 
-
+## 🚀 Live
+- **Link**: https://mini-io-t-device-management-system.vercel.app/
 
 
