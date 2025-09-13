@@ -65,4 +65,10 @@ password: 1234
 ## 🚀 Live
 - **Link**: https://mini-io-t-device-management-system.vercel.app/
 
+✅This project runs end-to-end locally:
+- Start backend → npm run dev (in backend/)
+- Start frontend → npm run dev (in frontend/)
+- Run publisher → node publisher.js (in backend/)
+- Open frontend → http://localhost:5173 and login.
+- Watch live telemetry update in dashboard 🚀
 
