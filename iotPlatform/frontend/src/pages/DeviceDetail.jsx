@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { io } from "socket.io-client";
 import API from "../api";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://miniiotdevicemanagementsystem.onrender.com/");
 
 export default function DeviceDetail() {
   const { id } = useParams();
